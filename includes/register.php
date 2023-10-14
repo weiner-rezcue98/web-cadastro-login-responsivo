@@ -3,7 +3,7 @@ require_once("db_config.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $useremail = $_POST["useremail"];
-    $userpassword = $_POST["userpassword"];
+    $userpassword = password_hash($_POST["userpassword"], PASSWORD_DEFAULT);
 
     // Use uma declaração preparada para verificar as credenciais do usuário
     $stmt = $conn->prepare("SELECT nome, senha FROM usuarios WHERE email = ?");
