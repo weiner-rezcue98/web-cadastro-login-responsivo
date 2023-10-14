@@ -37,6 +37,19 @@
     </head>
 
     <body class="auth-body-bg">
+        <?php
+        session_start();
+    
+        // Verifica se o usuário está autenticado
+        if (isset($_SESSION['autenticado']) && $_SESSION['autenticado'] === true) {
+            // Se o usuário já está autenticado, redirecione para a página do painel de usuário
+            header('Location: painel-user.php');
+            exit();
+        }
+        ?>
+        <div>
+            <!-- Resto do seu código HTML para a página de login -->
+
         
         <div>
             <div class="container-fluid p-0">
@@ -179,6 +192,7 @@
             </div>
             <!-- end container-fluid -->
         </div>
+    </div>
 
         <!-- JAVASCRIPT -->
         <script src="assets/libs/jquery/jquery.min.js"></script>

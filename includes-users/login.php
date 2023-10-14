@@ -15,21 +15,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Erro na conexão com o banco de dados: " . $conn->connect_error);
     }
 
-    // Consulta SQL para verificar as credenciais do usuário
-    $sql = "SELECT * FROM usuarios WHERE email = '$useremail' AND senha = '$userpassword'";
-
-    $result = $conn->query($sql);
+    // Use declaração preparada para evitar SQL Injection
+    $sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $useremail, $userpassword);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // Autenticação bem-sucedida, redireciona para a página principal
-        header('Location: ../index.html');
+        // Autenticação bem-sucedida, defina a variável de sessão
+        session_start();
+        $_SESSION['autenticado'] = true;
+
+        // Redirecione para a página do painel
+        header('Location: ../painel-user.php');
         exit();
     } else {
-        // Autenticação falhou, redireciona de volta para a página de login
+        // Autenticação falhou, redirecione de volta para a página de login
         header('Location: ../auth-login-2.html');
         exit();
     }
 
+    $stmt->close();
     $conn->close();
 }
 ?>
