@@ -124,4 +124,4 @@ Se você deseja contribuir para o projeto ou relatar problemas, sinta-se à vont
 
 ## Licença
 
-Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) para obter detalhes.
+Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE.txt) para obter detalhes.
