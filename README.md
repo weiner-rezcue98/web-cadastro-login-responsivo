@@ -68,4 +68,60 @@ Siga estas etapas para instalar o projeto em seu ambiente local:
 1. Clone este repositório:
 
 ```bash
-git clone 
+git clone https://github.com/weiner-rezcue98/web-cadastro-login-responsivo.git
+```
+2. Configure o banco de dados editando o arquivo `includes/db_config.php`. Substitua as informações de host, usuário, senha e nome do banco de dados.
+
+3. Importe o esquema do banco de dados a partir do arquivo `database.sql` em seu sistema de gerenciamento de banco de dados.
+
+4. Execute a aplicação em seu servidor da web.
+
+5. Acesse a aplicação em seu navegador.
+
+---
+
+## Uso
+
+1. Acesse a página de registro para criar uma nova conta.
+
+2. Após o registro, faça login na aplicação.
+
+3. Você terá acesso às áreas restritas da aplicação.
+
+---
+
+## Alterações Realizadas
+
+Neste projeto, foram feitas as seguintes alterações:
+
+- Adição de funcionalidade de autenticação de usuário.
+- Criação de páginas de registro e login.
+- Proteção de rotas autenticadas.
+
+---
+
+## Prós e Contras
+
+#### Prós
+
+- Fornece uma base sólida para adicionar autenticação a projetos web.
+- Interface de usuário simples e amigável para registro e login.
+- Uso de declarações preparadas para evitar injeção de SQL.
+- Integração com banco de dados para armazenamento seguro de informações de usuário.
+
+#### Contras
+
+- Pode precisar de melhorias adicionais em termos de segurança, como hashing de senhas.
+- O projeto é voltado para fins de aprendizado e pode precisar de personalização adicional para uso em produção.
+
+---
+
+## Contribuindo
+
+Se você deseja contribuir para o projeto ou relatar problemas, sinta-se à vontade para abrir uma [issue](https://github.com/weiner-rezcue98/web-cadastro-login-responsivo/issues) ou enviar um [pull request](https://github.com/weiner-rezcue98/web-cadastro-login-responsivo/pulls).
+
+---
+
+## Licença
+
+Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) para obter detalhes.
