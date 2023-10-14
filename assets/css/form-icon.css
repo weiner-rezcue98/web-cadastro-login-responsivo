@@ -1,0 +1,8 @@
+.valid-icon {
+    border: 2px solid green; /* Adicione um estilo de borda verde */
+    background-image: url('/assets/images/green_icon.png'); /* Adicione a imagem do ícone verde */
+    background-size: 20px; /* Ajuste o tamanho do ícone conforme necessário */
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 25px; /* Deixe espaço para o ícone à direita do campo de CPF */
+}

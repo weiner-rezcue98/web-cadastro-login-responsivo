@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "cpf-check": "^3.0.0",
+    "cpf-cnpj-validator": "^1.0.3"
+  }
+}
