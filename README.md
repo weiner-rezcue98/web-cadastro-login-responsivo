@@ -33,8 +33,7 @@ Este projeto tem como objetivo oferecer uma solução de autenticação de usuá
 ![Demonstração Página de Login](https://media.discordapp.net/attachments/1162859199127109635/1162859374553862164/login_responsive.png?ex=653d782f&is=652b032f&hm=b1a2f4685e6cf7a47dae81024a1099e375fd3e745723027c63c776905eb8d6ba&=&width=908&height=628)
 
 - Demonstração Página de Registro, Página de Login - Layout Responsivo Mobile
-![Demonstração Página de Registro](https://media.discordapp.net/attachments/1162859199127109635/1162861934144671877/register_responsive_mobile.png?ex=653d7a92&is=652b0592&hm=8ecd6d1f99cbad1fb3afd8acd6fb3d0442cf82ce0895a7d48fc1b1aa2b1386ce&=&width=293&height=628)
-(https://media.discordapp.net/attachments/1162859199127109635/1162861933825896459/login_mobile_responsive.png?ex=653d7a91&is=652b0591&hm=bc7e4f5f21378c4aae171eeaa53f3b3f7e64843430c487715a7189721f3b6d92&=&width=290&height=627)
+![Demonstração Página de Registro](https://media.discordapp.net/attachments/1162859199127109635/1162861934144671877/register_responsive_mobile.png?ex=653d7a92&is=652b0592&hm=8ecd6d1f99cbad1fb3afd8acd6fb3d0442cf82ce0895a7d48fc1b1aa2b1386ce&=&width=293&height=628) ![Demonstração Página de Login](https://media.discordapp.net/attachments/1162859199127109635/1162861933825896459/login_mobile_responsive.png?ex=653d7a91&is=652b0591&hm=bc7e4f5f21378c4aae171eeaa53f3b3f7e64843430c487715a7189721f3b6d92&=&width=290&height=627)
 
 ---
 
