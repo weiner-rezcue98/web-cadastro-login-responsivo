@@ -15,7 +15,7 @@ Bem-vindo ao projeto de autenticação de usuário! Este projeto fornece um sist
 3. [**Pré-requisitos**](#pré-requisitos)
 4. [**Instalação**](#instalação)
 5. [**Uso**](#uso)
-6. [**Alterações Realizadas**](#alterações-realizadas)
+6. [**Alterações Realizadas**](#alterações-realizadas) 🆕⚠️
 7. [**Prós e Contras**](#prós-e-contras)
 8. [**Contribuindo**](#contribuindo)
 9. [**Licença**](#licença)
@@ -94,9 +94,31 @@ git clone https://github.com/weiner-rezcue98/web-cadastro-login-responsivo.git
 
 Neste projeto, foram feitas as seguintes alterações:
 
-- Adição de funcionalidade de autenticação de usuário.
-- Criação de páginas de registro e login.
-- Proteção de rotas autenticadas.
+🆕 #Atualização do Projeto de Autenticação de Usuário 📅 17/10/2023
+
+**Adição do Campo de Foto de Perfil**: Foi adicionado um campo de foto de perfil ao formulário de registro. Os usuários podem fazer o upload de uma imagem PNG ou JPG com tamanho máximo de 100MB.
+
+**Alterações nos Códigos PHP**:
+
+   - O arquivo `register.php` foi atualizado para processar o upload da foto de perfil e inserir os dados no banco de dados.
+
+   ```php
+   $userimage = file_get_contents($_FILES["userimage"]["tmp_name"]);
+   $stmt = $conn->prepare("INSERT INTO usuarios (email, senha, imagem_perfil) VALUES (?, ?, ?)");
+   $stmt->bind_param("sss", $useremail, $userpassword, $userimage);
+   ```
+📅 17/10/2023 - Páginas HTML:
+
+Foram adicionadas páginas HTML para exibir mensagens de sucesso e erro após o registro. Personalize essas páginas de acordo com suas necessidades.
+Instruções de Uso:
+As instruções de uso foram atualizadas para refletir as novas funcionalidades. Os usuários podem se registrar com uma foto de perfil e acessar áreas restritas.
+Para instalar e usar esta atualização, siga as etapas originais do projeto e as alterações mencionadas nesta atualização. Lembre-se de configurar a conexão com o banco de dados em db_config.php.
+
+
+Outras:
+📅 15/10/2023 - Adição de funcionalidade de autenticação de usuário.
+📅 15/10/2023 - Criação de páginas de registro e login.
+📅 15/10/2023 - Proteção de rotas autenticadas.
 
 ---
 
