@@ -8,8 +8,42 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
     exit();
 }
 
-// Se o usuário está autenticado, você pode exibir o conteúdo do painel aqui
+// Conecte-se ao banco de dados (substitua as informações de conexão pelo seu próprio)
+$server = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'sua_basedados';
+
+$conn = mysqli_connect($server, $username, $password, $database);
+
+if (!$conn) {
+    die("Erro na conexão com o banco de dados: " . mysqli_connect_error());
+}
+
+// Suponha que você tenha uma variável $userId que representa o ID do usuário atual.
+// Você deve adaptar esta lógica para obter o ID do usuário atual.
+
+// Consulta para obter a imagem de perfil com base no ID do usuário
+$query = "SELECT imagem_perfil FROM usuarios WHERE id = $userId";
+$result = mysqli_query($conn, $query);
+
+if ($result) {
+    // Verifique se a consulta foi bem-sucedida
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $userImage = $row['imagem_perfil'];
+    } else {
+        // Trate o caso em que a consulta não retornou resultados
+        // Por exemplo, defina uma imagem padrão ou outra ação apropriada
+        $userImage = "caminho/para/imagem_padrao.jpg";
+    }
+} else {
+    // Trate o caso em que a consulta falhou
+    // Por exemplo, defina uma imagem padrão ou outra ação apropriada
+    $userImage = "caminho/para/imagem_padrao.jpg";
+}
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -886,9 +920,17 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] !== true) {
                                     <div class="card-body pt-0">
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <div class="avatar-md profile-user-wid mb-4">
-                                                    <img src="assets/images/users/avatar-1.jpg" alt="" class="img-thumbnail rounded-circle">
-                                                </div>
+                                            <div class="avatar-md profile-user-wid mb-4">
+    <?php
+    // Suponha que você já tenha obtido a imagem de perfil do usuário em $userImage do banco de dados.
+    // Certifique-se de que $userImage contenha a imagem binária.
+
+    // Codificar a imagem binária em formato base64
+    $userImageBase64 = base64_encode($userImage);
+    ?>
+    <img src="data:image/jpeg;base64, <?php echo $userImageBase64; ?>" alt="" class="img-thumbnail rounded-circle">
+</div>
+
                                                 <h5 class="font-size-15 text-truncate">Henry Price</h5>
                                                 <p class="text-muted mb-0 text-truncate">UI/UX Designer</p>
                                             </div>

@@ -1,11 +1,13 @@
 <?php
-$db_host = "localhost";
-$db_user = "root";
-$db_password = "";
-$db_name = "sua_basedados";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "sua_basedados";
 
-$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
+// Conectar ao banco de dados
+$conn = new mysqli($servername, $username, $password, $database);
 
+// Verificar a conexão
 if ($conn->connect_error) {
     die("Erro na conexão com o banco de dados: " . $conn->connect_error);
 }

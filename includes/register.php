@@ -1,31 +1,38 @@
 <?php
-require_once("db_config.php");
+require_once("dbconfig.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $useremail = $_POST["useremail"];
     $userpassword = password_hash($_POST["userpassword"], PASSWORD_DEFAULT);
 
-    // Use uma declaração preparada para verificar as credenciais do usuário
-    $stmt = $conn->prepare("SELECT nome, senha FROM usuarios WHERE email = ?");
-    $stmt->bind_param("s", $useremail);
+    // Tratamento do upload da imagem de perfil
+    if (isset($_FILES['userImage'])) {
+        $uploadDirectory = 'caminho/para/diretorio/de/imagens/';
+        $fileName = $_FILES['userImage']['name'];
+        $filePath = $uploadDirectory . $fileName;
 
-    if ($stmt->execute()) {
-        $stmt->store_result();
-        
-        if ($stmt->num_rows == 1) {
-            $stmt->bind_result($nome, $senha_hash);
-
-            if ($stmt->fetch() && password_verify($userpassword, $senha_hash)) {
-                // Autenticação bem-sucedida, redirecione para a página principal
-                header("Location: index.html");
-                exit;
-            }
+        // Move o arquivo para o diretório de destino
+        if (move_uploaded_file($_FILES['userImage']['tmp_name'], $filePath)) {
+            // O arquivo foi enviado com sucesso
+            // Agora, você pode armazenar o caminho do arquivo no banco de dados, associado ao usuário.
+        } else {
+            // O upload falhou, trate esse caso apropriadamente
         }
     }
 
-    // Autenticação falhou, redirecione para a página de login
-    header("Location: auth-login-2.html");
-    exit;
+    // Use uma declaração preparada para inserir um novo registro na tabela "usuarios"
+    $stmt = $conn->prepare("INSERT INTO usuarios (email, senha, imagem_perfil) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $useremail, $userpassword, $filePath);
+
+    if ($stmt->execute()) {
+        // Registro bem-sucedido, você pode redirecionar o usuário para uma página de confirmação
+        header("Location: registro_sucesso.html");
+        exit;
+    } else {
+        // Erro na inserção do registro, você pode redirecionar o usuário para uma página de erro
+        header("Location: registro_erro.html");
+        exit;
+    }
 }
 
 $conn->close();
