@@ -9,10 +9,10 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-$stmt = $con->prepare("SELECT useremail, userimage, username FROM usuarios WHERE id = ?");
+$stmt = $con->prepare("SELECT useremail, userimage, username, usercourse, userwhatsapp FROM usuarios WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
-$stmt->bind_result($useremail, $userimage, $username);
+$stmt->bind_result($useremail, $userimage, $username, $usercourse, $userwhatsapp);
 $stmt->fetch();
 $stmt->close();
 ?>
@@ -38,6 +38,8 @@ $stmt->close();
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <!-- Google reCAPTCHA -->
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     </head>
 
@@ -420,7 +422,7 @@ $stmt->close();
 
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="<?php echo $userimage; ?>" alt="Imagem de Perfil">
+                                <img class="rounded-circle header-profile-user" src="upload/profile-pic/<?php echo $userimage; ?>" alt="Imagem de Perfil">
                                 <span class="d-none d-xl-inline-block ms-1" key="t-henry"><?php echo $username; ?></span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
@@ -891,11 +893,11 @@ $stmt->close();
                                     <div class="card-body pt-0">
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <div class="avatar-md profile-user-wid mb-4">
-                                                    <img src="<?php echo $userimage; ?>" alt="" class="img-thumbnail rounded-circle">
-                                                </div>
-                                                <h5 class="font-size-15 text-truncate"><?php echo $username; ?></h5>
-                                                <p class="text-muted mb-0 text-truncate">UI/UX Designer</p>
+                                            <img id="profile-image" src="upload/profile-pic/<?php echo $userimage; ?>" alt="Perfil do Usuário" class="img-thumbnail rounded-circle" style="max-width: 60px;">
+
+                                            </div>
+                                            <h5 class="font-size-15 text-truncate"><?php echo $username; ?></h5>
+                                            <p class="text-muted mb-0 text-truncate"><?php echo $usercourse; ?></p>
                                             </div>
 
                                             <div class="col-sm-8">
@@ -915,31 +917,7 @@ $stmt->close();
     <a href="javascript:void(0);" class="btn btn-primary waves-effect waves-light btn-sm" onclick="openProfileEditor()">View Profile <i class="mdi mdi-arrow-right ms-1"></i></a>
 </div>
 
-<!-- Janela modal para edição de perfil -->
-<div id="profileModal" class="modal fade" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Conteúdo do formulário de edição de perfil -->
-                <h2>Edit Profile</h2>
-                <form action="atualizar-perfil.php" method="post">
-                    <label for="username">Nome de Usuário</label>
-                    <input type="text" id="username" name="username" value="<?php echo $username; ?>">
-                    <input type="submit" value="Salvar Alterações">
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    function openProfileEditor() {
-        var modal = new bootstrap.Modal(document.getElementById("profileModal"));
-        modal.show();
-    }
-</script>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -1543,42 +1521,64 @@ $stmt->close();
                 </div>
                 <!-- end modal -->
 
-                <!-- subscribeModal -->
-                <div class="modal fade" id="subscribeModal" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                <!-- Janela modal para edição de perfil -->
+                <div id="profileModal" class="modal fade" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header border-bottom-0">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="text-center mb-4">
-                                    <div class="avatar-md mx-auto mb-4">
-                                        <div class="avatar-title bg-light rounded-circle text-primary h1">
-                                            <i class="mdi mdi-email-open"></i>
-                                        </div>
+                     <div class="modal-content">
+                    <div class="modal-header border-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                <!-- Conteúdo do formulário de edição de perfil -->
+                <h4 class="card-title">Editar informações de cadastro</h4>
+                <p class="card-title-desc">Altere seu dados cadastrais</p>
+                 <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <div class="mb-3">
+                            <form class="form-label" action="atualizar-perfil.php" method="post" enctype="multipart/form-data">
+                                <div class="avatar-md mx-auto mb-4">
+                                    <div class="avatar-title bg-light rounded-circle text-primary h1">
+                                        <img id="profile-image" src="upload/profile-pic/<?php echo $userimage; ?>" alt="" class="img-thumbnail rounded-circle" style="max-width: 100px; max-height: 100px;">
                                     </div>
-
-                                    <div class="row justify-content-center">
-                                        <div class="col-xl-10">
-                                            <h4 class="text-primary">Subscribe !</h4>
-                                            <p class="text-muted font-size-14 mb-4">Subscribe our newletter and get notification to stay update.</p>
-
-                                            <div class="input-group bg-light rounded">
-                                                <input type="email" class="form-control bg-transparent border-0" placeholder="Enter Email address" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                                
-                                                <button class="btn btn-primary" type="button" id="button-addon2">
-                                                    <i class="bx bxs-paper-plane"></i>
-                                                </button>
-                                                
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
+                                    <input type="file" id="image-upload" name="image" accept="image/*" style="display: none;"><br></br></div>
+                                    <label for="image-upload" class="btn btn-primary">Trocar Imagem</label><br>
                                 </div>
-                            </div>
+                                
+                                <label for="username">Nome Completo</label>
+                                <input type="text" id="username" name="username" value="<?php echo $username; ?>" >
+                                <div class="g-recaptcha" data-sitekey="6LfcOJooAAAAAN9R6wTc8pvxv0XcpvhhqdMo4wl8" data-callback="onCaptchaComplete" data-expired-callback="onCaptchaExpired"></div>
+
+                                <input class="btn btn-primary" type="submit" value="Salvar Alterações" id="saveButton" disabled>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function openProfileEditor() {
+        var modal = new bootstrap.Modal(document.getElementById("profileModal"));
+        modal.show();
+    }
+
+    document.getElementById('image-upload').addEventListener('change', function () {
+        const image = document.getElementById('profile-image');
+        const file = this.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                image.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+</div>
                 <!-- end modal -->
 
                 <footer class="footer">
@@ -1677,7 +1677,26 @@ $stmt->close();
         <!-- App js -->
         <script src="assets/js/app.js"></script>
     </body>
+<!-- Google reCAPTCHA -->
 
+<script>
+    // Função chamada quando o CAPTCHA é resolvido com sucesso
+    function onCaptchaComplete() {
+        document.getElementById("saveButton").removeAttribute("disabled");
+        document.getElementById("saveButton").classList.remove("btn-secondary");
+        document.getElementById("saveButton").classList.add("btn-primary");
+    }
+
+    // Função chamada quando o CAPTCHA expira ou é inválido
+    function onCaptchaExpired() {
+        document.getElementById("saveButton").setAttribute("disabled", "disabled");
+        document.getElementById("saveButton").classList.remove("btn-primary");
+        document.getElementById("saveButton").classList.add("btn-secondary");
+    }
+</script>
+
+
+<!-- end Google recaptcha -->
 
 
 </html>
