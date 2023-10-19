@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function sendMessageToGPT(message) {
-        const apiKey = "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"; // Substitua pelo seu próprio API Key
+        const apiKey = "CHAVE"; // Substitua pelo seu próprio API Key
         const apiUrl = "https://api.openai.com/v1/engines/gpt-3.5-turbo/completions";
         const headers = {
             "Content-Type": "application/json",
