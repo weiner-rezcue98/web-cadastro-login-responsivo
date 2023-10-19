@@ -19,7 +19,7 @@ A segurança é uma prioridade para nós e incentivamos fortemente a comunidade 
 
 Se você descobrir uma vulnerabilidade ou problema de segurança, siga estas etapas:
 
-1. Envie um e-mail para [seu endereço de e-mail de contato de segurança] com os detalhes do problema. Use uma criptografia de e-mail, se possível.
+1. Envie um e-mail para pedroweinerbr@protonmail.com com os detalhes do problema. Use uma criptografia de e-mail, se possível.
 
 2. Aguarde uma confirmação de recebimento de e-mail. Prometemos responder o mais rápido possível.
 
@@ -43,7 +43,7 @@ Este projeto está empenhado em fornecer atualizações de segurança regulares.
 
 ## Contato
 
-Se você tiver alguma dúvida ou preocupação relacionada à segurança, entre em contato conosco em [seu endereço de e-mail de contato de segurança].
+Se você tiver alguma dúvida ou preocupação relacionada à segurança, entre em contato conosco em pedroweinerbr@protonmail.com.
 
 Obrigado por ajudar a tornar este projeto seguro para todos.
 
