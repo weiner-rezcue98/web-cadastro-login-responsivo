@@ -107,44 +107,33 @@
                                         </div>
             
                                         <div class="mt-4">
-                                            <form class="needs-validation" action="process-step-1.php" method="post">
-              
-                                                <div class="mb-3">
-                                                    <label for="username" class="form-label">Nome Completo</label>
-                                                    <input type="text" class="form-control" id="username" name="username" placeholder="Digite seu nome completo" required>
-                                                    <div class="invalid-feedback">
-                                                        Digite seu nome completo
-                                                    </div>
-                                                </div>
+                                            <form class="needs-validation" action="process-register.php" method="post" enctype="multipart/form-data">                                                      
+                                                
 
                                                 <div class="mb-3">
-                                                    <label for="useremail" class="form-label">Endereço de E-mail</label>
-                                                    <input type="email" class="form-control" id="useremail" name="useremail" placeholder="Digite seu endereço de e-mail" required>  
+                                                    <label for="userpassword" class="form-label">Crie uma senha</label>
+                                                    <input type="password" class="form-control" id="userpassword" name="userpassword" placeholder="Digite uma senha" required>
                                                     <div class="invalid-feedback">
-                                                        Digite seu endereço de e-mail
-                                                    </div>        
+                                                        Escolha uma senha
+                                                    </div>       
                                                 </div>
-                        
                                                 <div class="mb-3">
-                                                    <label for="usercpf" class="form-label">CPF</label>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" id="usercpf" name="usercpf" placeholder="Digite seu CPF" required>
-                                                    </div>
+                                                    <label for="userimage" class="form-label">Imagem de Perfil (PNG ou JPG, até 100MB)</label>
+                                                    <input type="file" class="form-control" id="userimage" name="userimage" accept=".png, .jpg" required>
                                                     <div class="invalid-feedback">
-                                                        Digite um CPF válido
+                                                        Selecione uma imagem de perfil válida (PNG ou JPG, até 100MB).
                                                     </div>
-                                                </div>                                                       
-                                                
+                                                </div>
+                                                <div>
+                                                    <p class="mb-0"><small>Ao se registrar você concorda com os</small>  <a href="#" class="text-primary">Termos de Uso</a></p>
+                                                </div>
                                                 <div class="mb-3">
-                                                    <label for="userdob" class="form-label">Data de Nascimento</label>
-                                                    <input type="date" class="form-control" id="userdob" name="userdob" required>
-                                                    <div class="invalid-feedback">
-                                                        Insira sua data de nascimento
-                                                    </div>
+                                                    <!-- Elemento de reCAPTCHA -->
+                                                    <div class="g-recaptcha" data-sitekey="6LfcOJooAAAAAN9R6wTc8pvxv0XcpvhhqdMo4wl8" data-callback="enableRegisterButton"></div>
                                                 </div>
                                             
                                                 <div class="mt-4 d-grid">
-                                                    <button id="registerButton" class="btn btn-primary waves-effect waves-light" type="submit">Próxima</button>
+                                                    <button id="registerButton" class="btn btn-primary waves-effect waves-light" type="submit" disabled>Registrar</button>
                                                 </div>
                     
 
