@@ -19,13 +19,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($userpassword, $dbUserPassword)) {
             // Login bem-sucedido, redirecione para a página de perfil ou página inicial
             $_SESSION['user_id'] = $id;
-            header('Location: dashboard.php'); // Substitua 'perfil.php' pela página desejada
+            header('Location: ../dashboard.php'); // Substitua
             exit();
         } else {
-            echo "Senha incorreta. <a href='auth-login-2.html'>Tente novamente</a>";
+            echo "Senha incorreta. <a href='../auth-login-2.html'>Tente novamente</a>";
         }
     } else {
-        echo "Usuário não encontrado. <a href='auth-login-2.html'>Tente novamente</a>";
+        echo "Usuário não encontrado. <a href='../auth-login-2.html'>Tente novamente</a>";
     }
 
     $stmt->close();

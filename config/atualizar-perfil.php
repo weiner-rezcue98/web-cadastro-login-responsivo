@@ -3,7 +3,7 @@ session_start();
 include 'config.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: dashboard.php');
+    header('Location: ../dashboard.php');
     exit();
 }
 
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $imageFileName = $_FILES['image']['name'];
 
         // Defina o caminho para salvar a imagem no servidor
-        $imagePath = 'upload/profile-pic/' . $imageFileName;
+        $imagePath = '../upload/profile-pic/' . $imageFileName;
 
         // Movendo a imagem para o caminho de destino
         if (move_uploaded_file($imageTempPath, $imagePath)) {
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ssi", $newUsername, $imageFileName, $user_id);
 
             if ($stmt->execute()) {
-                header('Location: dashboard.php');
+                header('Location: ../dashboard.php');
                 exit();
             } else {
                 echo "Erro ao atualizar o perfil: " . $stmt->error;
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("si", $newUsername, $user_id);
 
         if ($stmt->execute()) {
-            header('Location: dashboard.php');
+            header('Location: ../dashboard.php');
             exit();
         } else {
             echo "Erro ao atualizar o perfil: " . $stmt->error;

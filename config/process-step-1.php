@@ -7,5 +7,5 @@ $_SESSION['username'] = $_POST['username'];
 $_SESSION['userdob'] = $_POST['userdob'];
 
 // Redirecionar para a segunda etapa do formulário
-header('Location: auth-register-3.html');
+header('Location: ../auth-register-3.html');
 ?>

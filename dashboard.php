@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include 'config/config.php';
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: auth-login-2.html');
@@ -56,7 +56,7 @@ $stmt->close();
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
+                            <a href="dashboard.php" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="assets/images/logo.svg" alt="" height="22">
                                 </span>
@@ -65,7 +65,7 @@ $stmt->close();
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light">
+                            <a href="dashboard.php" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="assets/images/logo-light.svg" alt="" height="22">
                                 </span>
@@ -242,38 +242,7 @@ $stmt->close();
                             </div>
                         </div>
 
-                        <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item waves-effect"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img id="header-lang-img" src="assets/images/flags/us.jpg" alt="Header Language" height="16">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end">
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="en">
-                                    <img src="assets/images/flags/us.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">English</span>
-                                </a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp">
-                                    <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="gr">
-                                    <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="it">
-                                    <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ru">
-                                    <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
-                                </a>
-                            </div>
-                        </div>
+                    
 
                         <div class="dropdown d-none d-lg-inline-block ms-1">
                             <button type="button" class="btn header-item noti-icon waves-effect"
@@ -336,7 +305,7 @@ $stmt->close();
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bx bx-bell bx-tada"></i>
+                                <i class="bx bx-bell"></i>
                                 <span class="badge bg-danger rounded-pill">3</span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
@@ -434,13 +403,13 @@ $stmt->close();
                                 <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end">11</span><i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span key="t-settings">Settings</span></a>
                                 <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span key="t-lock-screen">Lock screen</span></a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="logout.php"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Sair da conta</span></a>
+                                <a class="dropdown-item text-danger" href="config/logout.php"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Sair da conta</span></a>
                             </div>
                         </div>
 
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                                <i class="bx bx-cog bx-spin"></i>
+                                <i class="bx bx-cog"></i>
                             </button>
                         </div>
 
@@ -1535,7 +1504,7 @@ $stmt->close();
                  <div class="row">
                     <div class="col-md-6 mx-auto">
                         <div class="mb-3">
-                            <form class="form-label" action="atualizar-perfil.php" method="post" enctype="multipart/form-data">
+                            <form class="form-label" action="config/atualizar-perfil.php" method="post" enctype="multipart/form-data">
                                 <div class="avatar-md mx-auto mb-4">
                                     <div class="avatar-title bg-light rounded-circle text-primary h1">
                                         <img id="profile-image" src="upload/profile-pic/<?php echo $userimage; ?>" alt="" class="img-thumbnail rounded-circle" style="max-width: 100px; max-height: 100px;">

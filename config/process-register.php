@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Processar o upload da imagem de perfil
     if (isset($_FILES['userimage']) && $_FILES['userimage']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = 'upload/profile-pic/'; // Substitua pelo caminho real no servidor
+        $uploadDir = '../upload/profile-pic/'; // Substitua pelo caminho real no servidor
         $uploadFile = $uploadDir . basename($_FILES['userimage']['name']);
 
         if (move_uploaded_file($_FILES['userimage']['tmp_name'], $uploadFile)) {
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         // Redirecionar para a página de sucesso ou login
-        header('Location: auth-login-2.html');
+        header('Location: ../auth-login-2.html');
         exit();
     } else {
         echo "Erro ao cadastrar o usuário: " . $stmt->error;
