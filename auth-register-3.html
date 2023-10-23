@@ -28,6 +28,8 @@
         <link href="assets/css/form-icon.css" rel="stylesheet" type="text/css" />
 
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 
     </head>
@@ -115,7 +117,7 @@
                                                     <input type="password" class="form-control" id="userpassword" name="userpassword" placeholder="Digite uma senha" required>
                                                     <div class="invalid-feedback">
                                                         Escolha uma senha
-                                                    </div>       
+                                                    </div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="userimage" class="form-label">Imagem de Perfil (PNG ou JPG, até 100MB)</label>
@@ -131,7 +133,15 @@
                                                     <!-- Elemento de reCAPTCHA -->
                                                     <div class="g-recaptcha" data-sitekey="6LfcOJooAAAAAN9R6wTc8pvxv0XcpvhhqdMo4wl8" data-callback="enableRegisterButton"></div>
                                                 </div>
-                                            
+                                                <div id="imageUploadSuccess" style="display: none;" class="alert alert-success">
+                                                    Imagem de perfil carregada com sucesso.
+                                                </div>
+                                                <div id="imageUploadError" style="display: none;" class="alert alert-danger">
+                                                    Ocorreu um erro ao carregar a imagem de perfil.
+                                                </div>
+                                                <div id="emailExistsError" style="display: none;" class="alert alert-danger">
+                                                    O e-mail já existe. Por favor, escolha outro e-mail.
+                                                </div>
                                                 <div class="mt-4 d-grid">
                                                     <button id="registerButton" class="btn btn-primary waves-effect waves-light" type="submit" disabled>Registrar</button>
                                                 </div>
@@ -281,7 +291,26 @@
 </script>
 
 
+<script>
+// Após o sucesso do upload da imagem, adicione o seguinte código:
+document.getElementById('userimage').setAttribute('disabled', 'disabled');
+document.getElementById('imageUploadSuccess').style.display = 'block';
 
+// Verificar e-mail existente (process-register.php)
+if ($stmt->execute()) {
+    // Redirecionar para a página de sucesso ou login
+    header('Location: ../auth-login-2.html');
+    exit();
+} else {
+    if ($stmt->errno === 1062) {
+        // O código 1062 indica uma chave duplicada, o que significa que o e-mail já existe
+        echo "O e-mail já existe. Por favor, escolha outro e-mail.";
+    } else {
+        echo "Erro ao cadastrar o usuário: " . $stmt->error;
+    }
+}
+
+</script>
 
     </body>
 

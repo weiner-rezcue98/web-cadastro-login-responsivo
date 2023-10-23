@@ -17,6 +17,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (move_uploaded_file($_FILES['userimage']['tmp_name'], $uploadFile)) {
             // O arquivo foi carregado com sucesso, e $uploadFile contém o caminho para a imagem no servidor.
+            
+            // Desabilitar o campo de upload de imagem
+            echo "<script>document.getElementById('userimage').setAttribute('disabled', 'disabled');</script>";
+            // Exibir uma mensagem ou fazer algo com id="imageUploadSuccess"
+            echo "<script>document.getElementById('imageUploadSuccess').style.display = 'block';</script>";
         } else {
             echo "Erro ao fazer upload do arquivo de imagem.";
             exit();
@@ -27,6 +32,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Validar o reCAPTCHA aqui (adapte o código conforme necessário)
+
+    // Verificar se o e-mail já existe no banco de dados
+    $checkEmailQuery = $con->prepare("SELECT COUNT(*) FROM usuarios WHERE useremail = ?");
+    $checkEmailQuery->bind_param("s", $useremail);
+    $checkEmailQuery->execute();
+    $checkEmailQuery->bind_result($count);
+    $checkEmailQuery->fetch();
+    $checkEmailQuery->close();
+
+    if ($count > 0) {
+        // Exibir um pop-up ou mensagem que o e-mail já existe
+        echo "<script>alert('O e-mail já existe.');</script>";
+        // Redirecionar para a página de registro ou fazer o que for necessário
+        header('Location: ../auth-register-3.html');
+        exit();
+    }
 
     // Salvar os dados no banco de dados, incluindo o caminho da imagem
     $stmt = $con->prepare("INSERT INTO usuarios (useremail, usercpf, username, userdob, userimage, userpassword) VALUES (?, ?, ?, ?, ?, ?)");

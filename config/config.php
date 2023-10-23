@@ -1,11 +1,8 @@
 <?php
 $host = 'localhost'; // Geralmente 'localhost'
 $username = 'minhadb'; // Nome de usuário do banco de dados
-
-// A senha criptografada deve ser armazenada neste arquivo
-$encrypted_password = ')is@yooFj[Rb!9-P';
-
 $database = 'minhadb'; // Nome do banco de dados
+$encrypted_password = ')is@yooFj[Rb!9-P';
 
 $con = new mysqli($host, $username, $encrypted_password, $database); // Não armazene a senha aqui
 
