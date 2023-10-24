@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
 
     <body class="auth-body-bg">
@@ -109,15 +109,28 @@
                                         </div>
             
                                         <div class="mt-4">
-                                            <form class="needs-validation" action="config/process-register.php" method="post" enctype="multipart/form-data">                                                      
+                                            <form class="needs-validation" action="process-register.php" method="post" enctype="multipart/form-data">                                                      
                                                 
 
                                                 <div class="mb-3">
+                                                    
                                                     <label for="userpassword" class="form-label">Crie uma senha</label>
-                                                    <input type="password" class="form-control" id="userpassword" name="userpassword" placeholder="Digite uma senha" required>
+                                                    <div class="input-group auth-pass-inputgroup">
+                                                    <input type="password" class="form-control" id="userpassword" name="userpassword" placeholder="Digite uma senha" aria-label="Password" aria-describedby="password-addon" wfd-id="id1" required>
+                                                    <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                                     <div class="invalid-feedback">
                                                         Escolha uma senha
                                                     </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <select class="form-select" name="usercourse" required>
+                                                        <option value="" disabled selected>Selecione um curso</option>
+                                                        <option value="1">Lógica de programação</option>
+                                                        <option value="2">Matemática</option>
+                                                        <!-- Adicione opções para todos os cursos disponíveis -->
+                                                    </select>
+                                                    
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="userimage" class="form-label">Imagem de Perfil (PNG ou JPG, até 100MB)</label>
@@ -126,6 +139,19 @@
                                                         Selecione uma imagem de perfil válida (PNG ou JPG, até 100MB).
                                                     </div>
                                                 </div>
+                                                <div class="mb-3">
+                                                    <label for="cep" class="form-label">CEP:</label>
+                                                    <input type="text" class="form-control" name="cep" id="cep" placeholder="00000000" />
+                                                    <label for="cidade" class="form-label">Cidade:</label>
+                                                    <input type="text" class="form-control"name="cidade" id="cidade" />
+    
+                                                    <label for="rua" class="form-label">Rua:</label>
+                                                    <input type="text" class="form-control" name="rua" id="rua" />
+    
+                                                    <label for="estado" class="form-label">Estado:</label>
+                                                    <input type="text" class="form-control" name="estado" id="estado" />
+                                                    </div>
+
                                                 <div>
                                                     <p class="mb-0"><small>Ao se registrar você concorda com os</small>  <a href="#" class="text-primary">Termos de Uso</a></p>
                                                 </div>
@@ -142,10 +168,12 @@
                                                 <div id="emailExistsError" style="display: none;" class="alert alert-danger">
                                                     O e-mail já existe. Por favor, escolha outro e-mail.
                                                 </div>
+
+
                                                 <div class="mt-4 d-grid">
                                                     <button id="registerButton" class="btn btn-primary waves-effect waves-light" type="submit" disabled>Registrar</button>
                                                 </div>
-                    
+                                                
 
                                             </form>
 
@@ -299,7 +327,7 @@ document.getElementById('imageUploadSuccess').style.display = 'block';
 // Verificar e-mail existente (process-register.php)
 if ($stmt->execute()) {
     // Redirecionar para a página de sucesso ou login
-    header('Location: ../auth-login-2.html');
+    header('Location: auth-login-2.html');
     exit();
 } else {
     if ($stmt->errno === 1062) {
@@ -311,6 +339,31 @@ if ($stmt->execute()) {
 }
 
 </script>
+
+<!-- task cep -->
+
+<script>
+  $(document).ready(function() {
+    $('#cep').blur(function() {
+      var cep = $(this).val().replace(/\D/g, '');
+
+      if (cep.length != 8) {
+        return;
+      }
+
+      $.get(`https://viacep.com.br/ws/${cep}/json/`, function(data) {
+        if (!data.erro) {
+          $('#cidade').val(data.localidade);
+          $('#rua').val(data.logradouro);
+          $('#estado').val(data.uf);
+        } else {
+          alert('CEP não encontrado.');
+        }
+      });
+    });
+  });
+</script>
+
 
     </body>
 
